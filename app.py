@@ -11,10 +11,13 @@ st.markdown("快速搜尋詩歌、歌詞及 Cantonhymn 連結")
 # 1. Load Data
 @st.cache_data
 def load_data():
-    # Make sure your CSV filename matches what you uploaded to GitHub
-    df = pd.read_csv('eccc-song-library-2026.csv')
+    # 讀取 CSV
+    df = pd.read_csv('eccc-song-library-2026.csv', encoding='utf-8-sig')
+    
+    # --- 新增這行：自動移除所有欄位名稱前後的空白 ---
+  
+      df.columns = df.columns.str.strip() 
     return df
-
 try:
     df = load_data()
 except:
