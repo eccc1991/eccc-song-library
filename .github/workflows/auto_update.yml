@@ -1,0 +1,33 @@
+name: Auto Update Song Library
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # 每個禮拜日凌晨 12:00 自動執行一次
+  workflow_dispatch: # 允許你隨時手動點擊按鈕執行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install ytmusicapi pandas
+
+      - name: Run update script
+        run: python update_csv.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add eccc-song-library-2026.csv
+          git commit -m "Auto-update lyrics and songs" || exit 0
+          git push
