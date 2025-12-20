@@ -16,7 +16,7 @@ def load_data():
     
     # --- 新增這行：自動移除所有欄位名稱前後的空白 ---
   
-      df.columns = df.columns.str.strip() 
+    df.columns = df.columns.str.strip() 
     return df
 try:
     df = load_data()
