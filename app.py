@@ -64,7 +64,7 @@ for index, row in filtered_df.iterrows():
             # Auto-generate Cantonhymn Link
             # We URL-encode the song name to handle Chinese characters correctly
             encoded_name = urllib.parse.quote(row['Song Title'])
-            ch_url = f"https://cantonhymn.net/songs/{encoded_name}"
+            ch_url = f"https://cantonhymn.net/song/{encoded_name}"
             st.link_button("🔍 Cantonhymn 搵譜", ch_url)
             
             st.info("💡 如果 Cantonhymn 連結失效，請嘗試在該網站手動搜尋。")
